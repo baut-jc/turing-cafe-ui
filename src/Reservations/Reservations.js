@@ -6,7 +6,7 @@ function Reservations({reservations}) {
   const guestLists = reservations.map(guest => {
     console.log('guest', guest)
     return (
-      <div>
+      <div className='reservations'>
         {/* <GuestInfo/> */}
         <h1>{guest.name}</h1>
         <p>{guest.date}</p>
