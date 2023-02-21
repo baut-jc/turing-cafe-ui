@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Reservations from '../Reservations/Reservations';
-// import fetchData from '../api'
+import Form from '../Form/Form';
 
-function App() {
+export default function App() {
   const [reservations, setReservations] = useState([])
   const [error, setError] = useState('')
   
@@ -23,24 +23,18 @@ function App() {
   
   useEffect(() => {
     getReservations()
-    
   }, [])
-  console.log(reservations[1])
-
   
     return (
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
-        { error && error }
-        <Reservations reservations={reservations}/>
         <div className='resy-form'>
-
+          <Form />
         </div>
         <div className='resy-container'>
-          
+          { error && error }
+          <Reservations reservations={reservations}/>
         </div>
       </div>
     )
 }
-
-export default App;
