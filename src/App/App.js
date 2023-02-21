@@ -24,16 +24,26 @@ export default function App() {
   useEffect(() => {
     getReservations()
   }, [])
+
+  const addRSVP = (newReservation) => {
+    setReservations([...reservations, newReservation])
+  }
+
+  const cancelRSVP = (id) => {
+    const filteredRSVP = reservations.filter(reservation => reservation.id !== id)
+
+    setReservations(filteredRSVP)
+  }
   
     return (
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
         <div className='resy-form'>
-          <Form />
+          <Form addRSVP={addRSVP}/>
         </div>
         <div className='resy-container'>
           { error && error }
-          <Reservations reservations={reservations}/>
+          <Reservations reservations={reservations} cancelRSVP={cancelRSVP}/>
         </div>
       </div>
     )
