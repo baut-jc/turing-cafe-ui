@@ -1,12 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+// import fetchData from '../api'
 
-class App extends Component {
-  render() {
+function App() {
+  const [reservations, setReservations] = useState([])
+  const [error, setError] = useState('')
+
+  const getReservations = async () => {
+    const url = 'http://localhost:3001/api/v1/reservations'
+    setError('')
+    
+    try {
+      const response = await fetch(url)
+      const reservations = await response.json()
+      setReservations(reservations)
+    } catch(error) {
+      setError(error.message)
+    }
+    console.log('data?', reservations)
+  }
+
+  useEffect(() => {
+    getReservations()
+  }, [])
+
+  
     return (
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
+        { error && error }
         <div className='resy-form'>
+        {/* <Reservations reservations={reservations}/> */}
 
         </div>
         <div className='resy-container'>
@@ -14,7 +38,6 @@ class App extends Component {
         </div>
       </div>
     )
-  }
 }
 
 export default App;
